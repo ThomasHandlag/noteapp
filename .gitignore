@@ -1,0 +1,11 @@
+
+# Flutter/Dart specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+.dart_tool/
+.pub/
+
