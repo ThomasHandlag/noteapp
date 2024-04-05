@@ -1,0 +1,18 @@
+const Map<String, String> vieLang = {
+  'home': 'Trang chủ',
+  'login': 'Đăng nhữ',
+  'register': 'Đăng ký',
+  'email': 'Email',
+  'password': 'Mật khẩu',
+  'loginBtn': 'Đăng nhập',
+  'registerBtn': 'Đăng ký',
+  'forgotPassword': 'Quên mật khẩu',
+  'name': 'Tên',
+  'welcome': 'Xin chào',
+  'logout': 'Đăng nhập',
+  'changeLanguage': 'Thay đổi ngôn ngữ',
+  'search': 'Tìm kiếm',
+  'note': 'Ghi chú',
+  'notes': 'Các ghi chú',
+  'noteTitle': 'Tiêu đề',
+};

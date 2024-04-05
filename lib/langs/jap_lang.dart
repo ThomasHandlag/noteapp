@@ -1,0 +1,18 @@
+const Map<String, String> japLang = {
+  'home': 'ホーム',
+  'login': 'ログイン',
+  'register': '登録',
+  'email': 'メールアドレス',
+  'password': 'パスワード',
+  'loginBtn': 'ログイン',
+  'registerBtn': '登録',
+  'forgotPassword': 'パスワードを忘れた',
+  'name': '名前',
+  'welcome': 'ようこそ',
+  'logout': 'ログアウト',
+  'changeLanguage': '言語を変更',
+  'search': '検索',
+  'note': 'メモ',
+  'notes': 'メモ',
+  'noteTitle': 'タイトル',
+};
