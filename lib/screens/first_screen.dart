@@ -26,7 +26,10 @@ class _FirstScreenState extends State<FirstScreen>
   List<FirstScreenSlide> generateSlides() {
     List<FirstScreenSlide> slides = [];
     for (int i = 0; i < 5; i++) {
-      slides.add(FirstScreenSlide(id: i));
+      slides.add(FirstScreenSlide(
+        id: i,
+        imagePath: introAppImages[i],
+      ));
     }
     return slides;
   }
@@ -44,6 +47,15 @@ class _FirstScreenState extends State<FirstScreen>
         "Add voice notes, don't worry about formatting, we'll take care of it"
   }.entries.toList();
 
+  final List<String> introAppImages = [
+    "assets/images/sl_img1.png",
+    "assets/images/sl_img3.png",
+    "assets/images/sl_img2.png",
+    "assets/images/sl_img4.png",
+    "assets/images/sl_img5.png",
+    "assets/images/sl_img6.png"
+        "assets/images/sl_img7.png"
+  ];
 
   int active = 0;
 
@@ -119,22 +131,18 @@ class _FirstScreenState extends State<FirstScreen>
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.40,
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 19, 19, 32),
+                                color: Colors.transparent,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(40.0),
                                   topRight: Radius.circular(40.0),
                                 ),
                               ),
                               child: AnimatedContainer(
-                                  width: 200.0,
-                                  height: 200.0,
-                                  duration: const Duration(milliseconds: 1000),
-                                  curve: Curves.fastOutSlowIn,
-                                  decoration: const BoxDecoration(
-                                      color: Color.fromARGB(255, 48, 48, 172),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(40.0),
-                                      ))),
+                                width: 200.0,
+                                height: 200.0,
+                                duration: const Duration(milliseconds: 1000),
+                                curve: Curves.fastOutSlowIn,
+                              ),
                             ),
                             Column(
                                 mainAxisAlignment:
@@ -143,8 +151,8 @@ class _FirstScreenState extends State<FirstScreen>
                                 children: [
                                   Container(
                                     width:
-                                        MediaQuery.of(context).size.width * 0.8,
-                                    padding: const EdgeInsets.all(10.0),
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    padding: const EdgeInsets.all(3.0),
                                     child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -176,7 +184,7 @@ class _FirstScreenState extends State<FirstScreen>
                                           Text(
                                             introApp[active].value,
                                             style: const TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 18,
                                               color: Color.fromARGB(
                                                   255, 196, 191, 216),
                                               fontFamily: "Poppins",
@@ -241,7 +249,7 @@ class _FirstScreenState extends State<FirstScreen>
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                         SignScreen()));
+                                                        SignScreen()));
                                           }
                                         },
                                         child: Container(
