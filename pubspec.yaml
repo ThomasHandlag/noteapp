@@ -38,6 +38,9 @@ dependencies:
   shared_preferences: ^2.2.2
   google_fonts: ^6.2.0
   bloc: ^8.1.4
+  google_sign_in: ^6.2.1
+  # firebase_auth: ^4.14.1
+  firebase_core: ^2.23.0
 
 dev_dependencies:
   flutter_test:
@@ -55,7 +58,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/images/sl_img1.png
+    - assets/images/sl_img2.png
+    - assets/images/sl_img3.png
+    - assets/images/sl_img4.png
+    - assets/images/sl_img5.png
+    - assets/images/sl_img6.png
+    - assets/images/sl_img7.png
+    - assets/images/sl_img8.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
