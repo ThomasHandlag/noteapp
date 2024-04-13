@@ -49,6 +49,7 @@ dependencies:
   # google_sign_in: ^6.1.0
   # meta: ^1.7.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +75,7 @@ flutter:
     - assets/images/sl_img6.png
     - assets/images/sl_img7.png
     - assets/images/sl_bg.png
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
