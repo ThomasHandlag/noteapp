@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:noteapp/components/first_screen_slide.dart';
 import 'package:noteapp/components/indicator_btn.dart';
+import 'package:noteapp/layouts/home_screen.dart';
 import 'dart:developer' as dev;
 
-import 'package:noteapp/screens/sign_screen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -106,6 +106,7 @@ class _FirstScreenState extends State<FirstScreen>
                     options: CarouselOptions(
                         autoPlay: false,
                         enlargeCenterPage: false,
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
                         viewportFraction: 1,
                         initialPage: 2,
                         aspectRatio: 1.0,
@@ -245,11 +246,11 @@ class _FirstScreenState extends State<FirstScreen>
                                           if (active != 4) {
                                             carouselController.nextPage();
                                           } else {
-                                            Navigator.push(
+                                            Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SignScreen()));
+                                                        HomeScreen()));
                                           }
                                         },
                                         child: Container(

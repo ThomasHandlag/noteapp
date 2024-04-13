@@ -37,10 +37,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.2
   google_fonts: ^6.2.0
-  bloc: ^8.1.4
-  google_sign_in: ^6.2.1
-  # firebase_auth: ^4.14.1
-  firebase_core: ^2.23.0
+  flutter_quill: ^9.3.6
+  flutter_quill_extensions: ^9.3.6
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  image_picker: ^1.0.8
+  google_generative_ai: ^0.3.0
+  # bloc: ^8.1.4
+  # firebase_auth: ^4.3.0
+  # firebase_core: ^2.29.0
+  # google_sign_in: ^6.1.0
+  # meta: ^1.7.0
 
 dev_dependencies:
   flutter_test:
