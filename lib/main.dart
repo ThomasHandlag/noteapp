@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/screens/error_screen.dart';
+import 'package:noteapp/layouts/error_screen.dart';
 import 'package:noteapp/api/device_shared_data.dart';
-import 'package:noteapp/screens/first_screen.dart';
+import 'package:noteapp/layouts/first_screen.dart';
 import 'dart:developer' as dev;
+
+import 'package:noteapp/themes/theme_color.dart';
 
 void main() {
   runApp(const NoteApp());
@@ -10,15 +12,13 @@ void main() {
 
 class NoteApp extends StatelessWidget {
   const NoteApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme:  ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      themeMode: ThemeMode.dark,
       home: FutureBuilder(
           future: DeviceSharedData.getTokens(),
           builder: (context, snapshot) {

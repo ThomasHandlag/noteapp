@@ -1,50 +1,57 @@
+/// {@template user}
+/// User model
+///
+/// [User.empty] represents an unauthenticated user.
+/// {@endtemplate}
 class User {
-  String? name;
-  String email;
-  String password;
-  String? token;
-  User(
-      {required this.name,
-      required this.email,
-      required this.password,
-      required this.token});
-
-  User.logInUser({
-    required this.email,
-    required this.password,
+  /// {@macro user}
+  const User({
+    required this.id,
+    this.email,
+    this.name,
+    this.photo,
+    this.password,
   });
 
-  User.registerUser({
-    required this.email,
-    required this.password,
-    required this.name,
-  });
+  final String? email;
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': password,
-        'token': token,
-      };
+  final String id;
 
-  static int checkPassword(String password) {
-    RegExp digitRegex = RegExp(r'\d');
-    RegExp specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
-    if (password.length < 8) {
-      return 1;
-    }
-    if (!digitRegex.hasMatch(password)) {
-      return 2;
-    }
-    if (!specialCharRegex.hasMatch(password)) {
-      return 3;
-    }
-    return 0;
+  final String? name;
+
+  final String? photo;
+
+  final String? password;
+  
+  static const empty = User(id: '');
+
+  bool get isEmpty => this == User.empty;
+
+  bool get isNotEmpty => this != User.empty;
+
+  set email(String? email) => email ??= '';
+  set name(String? name) => name ??= '';
+  set photo(String? photo) => photo ??= '';
+  set password(String? password) => password ??= '';
+}
+
+int checkPassword(String password) {
+  RegExp digitRegex = RegExp(r'\d');
+  RegExp specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+  if (password.length < 8) {
+    return 1;
   }
-
-  static bool isValidEmail(String email) {
-    return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
+  if (!digitRegex.hasMatch(password)) {
+    return 2;
   }
+  if (!specialCharRegex.hasMatch(password)) {
+    return 3;
+  }
+  return 0;
+}
+
+bool isValidEmail(String email) {
+  return RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(email);
 }
