@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:noteapp/api/device_shared_data.dart';
+import 'package:noteapp/layouts/home_screen.dart';
 import 'package:noteapp/models/user_model.dart';
+import 'dart:developer' show log;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key, required this.onPress});
@@ -26,7 +30,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey =
       GlobalKey<FormState>(debugLabel: 'loginFormKey');
 
-  final User loginUser = User.empty;
+  UserModel loginUser = UserModel(id: "", email: "", password: "", photo: "", name: "");
+
+  void signUp() {
+    if (_formKey.currentState!.validate()) {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: loginUser.email, password: loginUser.password)
+          .then((value) => {
+                DeviceSharedData.setUsedBefore().whenComplete(() {
+                  if (value.user != null)
+                  {
+                    value.user?.updateDisplayName(loginUser.name);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const HomeScreen();
+                    }));
+                  }
+                else
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Sign up failed")));
+                  }
+                })
+              });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,36 +83,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 20.0),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide.none),
-                          hintText: "User name",
-                          hintStyle: TextStyle(
-                            color: Colors.white30,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.person,
-                            size: 18,
-                            color: Colors.white30,
-                          ),
-                          fillColor: Color.fromARGB(255, 50, 45, 68),
-                          filled: true,
-                          contentPadding: EdgeInsets.all(10)),
-                      onChanged: (value) {
-                        setState(() {
-                          loginUser.email = value;
-                        });
-                      },
-                      // validator: (value) {
-                      //   if (!User.isValidEmail(value!)) {
-                      //     return 'Invalid email';
-                      //   }
-                      //   return '';
-                      // }
-                    ),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide.none),
+                            hintText: "User name",
+                            hintStyle: TextStyle(
+                              color: Colors.white30,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.person,
+                              size: 18,
+                              color: Colors.white30,
+                            ),
+                            fillColor: Color.fromARGB(255, 50, 45, 68),
+                            filled: true,
+                            contentPadding: EdgeInsets.all(10)),
+                        onChanged: (value) {
+                          setState(() {
+                            loginUser.name = value ;
+                            log(value);
+                          });
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please fill the form";
+                          } else {
+                            return null;
+                          }
+                        }),
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 20.0),
@@ -105,15 +135,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           contentPadding: EdgeInsets.all(10)),
                       onChanged: (value) {
                         setState(() {
-                          loginUser.email = value;
+                          loginUser.email = value ;
                         });
                       },
-                      // validator: (value) {
-                      //   if (!User.isValidEmail(value!)) {
-                      //     return 'Invalid email';
-                      //   }
-                      //   return '';
-                      // }
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Invalid email';
+                        }
+                        return null;
+                      }
                     ),
                   ),
                   Container(
@@ -156,12 +186,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         });
                       },
                       obscureText: !_isShowPassword,
-                      // validator: (value) {
-                      //   if (value!.isEmpty) {
-                      //     return 'Please fill in password';
-                      //   }
-                      //   return '';
-                      // },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please fill in password';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   Container(
@@ -199,7 +229,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      signUp();
+                    },
                     child: Container(
                         width: 100,
                         height: 40,

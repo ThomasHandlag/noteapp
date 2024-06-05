@@ -83,7 +83,7 @@ class _CAppBarState extends State<CAppBar> {
               child: IconButton(
                 onPressed: () => showDialog<String>(
                   context: context,
-                  builder: (BuildContext context) => FilterDialog(),
+                  builder: (BuildContext context) =>const FilterDialog(),
                 ),
                 icon: const Icon(Icons.filter_list),
                 style: ButtonStyle(

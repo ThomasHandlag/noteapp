@@ -43,10 +43,13 @@ dependencies:
   path: ^1.9.0
   image_picker: ^1.0.8
   google_generative_ai: ^0.3.0
-  # bloc: ^8.1.4
-  # firebase_auth: ^4.3.0
-  # firebase_core: ^2.29.0
-  # google_sign_in: ^6.1.0
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5
+  firebase_core: ^2.31.1
+  firebase_auth: ^4.19.6
+  cloud_firestore: ^4.17.4
+  flutter_gemini: ^2.0.4
   # meta: ^1.7.0
 
 
@@ -75,6 +78,7 @@ flutter:
     - assets/images/sl_img6.png
     - assets/images/sl_img7.png
     - assets/images/sl_bg.png
+    - assets/images/flame.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

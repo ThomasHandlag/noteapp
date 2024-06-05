@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:noteapp/api/device_shared_data.dart';
 import 'package:noteapp/components/first_screen_slide.dart';
 import 'package:noteapp/components/indicator_btn.dart';
 import 'package:noteapp/layouts/home_screen.dart';
 import 'dart:developer' as dev;
 
+import 'package:noteapp/layouts/sign_screen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -246,11 +248,13 @@ class _FirstScreenState extends State<FirstScreen>
                                           if (active != 4) {
                                             carouselController.nextPage();
                                           } else {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeScreen()));
+                                            DeviceSharedData.setUsedBefore()
+                                                .whenComplete(() =>
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const SignScreen())));
                                           }
                                         },
                                         child: Container(

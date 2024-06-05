@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/layouts/mutation_screen.dart';
 import 'package:noteapp/models/note.dart';
 import 'package:noteapp/pages/home_page.dart';
-import 'package:noteapp/pages/settings_pages.dart';
-import 'package:noteapp/components/capp_bar.dart';
-import 'dart:developer' as dev;
+import 'package:firebase_auth/firebase_auth.dart ';
+import 'dart:developer' show log;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -13,24 +13,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int pageIndex = 0;
 
-  void setMutationData(Note? note) {
-    setState(() {
-      pageIndex = 3;
-      pages[pageIndex] = MutationScreen(note: note);
-    });
-  }
   
+
   List<Widget> pages = [
-    HomePage(onPress: (Note? note) {
-    }), 
-    HomePage(onPress: (Note? note) {
-     
-    }),
-    const SettingsPage(),
-    const MutationScreen(note: null),
+    HomePage(),
+    HomePage(),
   ];
 
   void changePage(int index) {
@@ -41,61 +30,61 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? userName = FirebaseAuth.instance.currentUser?.displayName;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: pageIndex == 0 ? CAppBar(title: 'Notes App') : null,
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+          title: Text("Welcome ${userName ?? ""}"),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.person))
+          ],
+          titleTextStyle: const TextStyle(
+            fontSize: 25.0,
+          ),
+          bottom: PreferredSize(
+              preferredSize: Size(MediaQuery.of(context).size.width, 100),
+              child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SearchAnchor(
+                    builder:
+                        (BuildContext context, SearchController controller) {
+                      return SearchBar(
+                        onTap: () => controller.openView(),
+                        hintText: "Search notes",
+                        leading: IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      );
+                    },
+                    suggestionsBuilder: (context, controller) {
+                      return List<ListTile>.generate(5, (int index) {
+                        final String item = 'item $index';
+                        return ListTile(
+                          title: Text(item),
+                          onTap: () {
+                            setState(() {
+                              controller.closeView(item);
+                            });
+                          },
+                        );
+                      });
+                    },
+                  )))),
       bottomNavigationBar: NavigationBar(
-        destinations: [
-          const NavigationDestination(
+        destinations: const [
+          NavigationDestination(
             icon: Icon(Icons.notes),
             label: "Notes",
           ),
-          const NavigationDestination(
+          NavigationDestination(
             icon: Icon(Icons.cloud),
             label: "Cloud",
           ),
-          const NavigationDestination(
-              icon: Icon(Icons.settings), label: "Settings"),
-          Transform.translate(
-              offset: const Offset(0, -40),
-              child: SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow( 
-                          color: Color.fromARGB(255, 151, 145, 169),
-                          offset: Offset(0, 0),
-                          blurRadius: 8.0,
-                        )
-                      ],
-                      shape: BoxShape.circle,
-                    ),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        setState(() {
-                          pageIndex = 3;
-                        });
-                      },
-                      backgroundColor: const Color.fromARGB(255, 102, 39, 203),
-                      tooltip: "Add note",
-                      shape: const CircleBorder(),
-                      child: const Icon(Icons.add, color: Colors.white),
-                    ),
-                  )))
         ],
         onDestinationSelected: (int index) {
           setState(() {
             pageIndex = index;
-            if (pageIndex ==0) {
-              setState(() {
-                pages[index] = HomePage(onPress: (Note? note) {
-                  setMutationData(note);
-                });
-              });
-            }
-            dev.log(index.toString());
           });
         },
         selectedIndex: pageIndex,
@@ -103,18 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color.fromARGB(255, 41, 41, 48),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            stops: [0.5, 1],
-            colors: [
-              Color.fromARGB(255, 19, 19, 32),
-              Color.fromARGB(255, 50, 81, 255)
-            ],
-          ),
-          image: DecorationImage(
-              image: AssetImage('assets/images/sl_bg.png'), fit: BoxFit.fill),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
         ),
         child: pages[pageIndex],
       ),

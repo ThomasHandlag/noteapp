@@ -1,38 +1,21 @@
-/// {@template user}
-/// User model
-///
-/// [User.empty] represents an unauthenticated user.
-/// {@endtemplate}
-class User {
-  /// {@macro user}
-  const User({
+class UserModel {
+  String email;
+
+  String id;
+
+  String name;
+
+  String photo;
+
+  String password;
+
+  UserModel({
     required this.id,
-    this.email,
-    this.name,
-    this.photo,
-    this.password,
+    required this.email,
+    required this.name,
+    required this.photo,
+    required this.password,
   });
-
-  final String? email;
-
-  final String id;
-
-  final String? name;
-
-  final String? photo;
-
-  final String? password;
-  
-  static const empty = User(id: '');
-
-  bool get isEmpty => this == User.empty;
-
-  bool get isNotEmpty => this != User.empty;
-
-  set email(String? email) => email ??= '';
-  set name(String? name) => name ??= '';
-  set photo(String? photo) => photo ??= '';
-  set password(String? password) => password ??= '';
 }
 
 int checkPassword(String password) {

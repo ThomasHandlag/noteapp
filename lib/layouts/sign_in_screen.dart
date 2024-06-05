@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/api/device_shared_data.dart';
+import 'package:noteapp/layouts/home_screen.dart';
 import 'package:noteapp/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key, required this.onPress});
@@ -14,11 +17,38 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _formKey =
       GlobalKey<FormState>(debugLabel: 'loginFormKey');
 
-  final User loginUser = User.empty;
+  UserModel loginUser =
+      UserModel(id: "", name: "", email: "", password: "", photo: "");
 
   bool _isShowPassword = false;
 
-  Future<dynamic> signIn() async => await Future.value();
+  Future<void> signIn() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: loginUser.email, password: loginUser.password)
+          .then((value) => {
+                DeviceSharedData.setUsedBefore().whenComplete(() {
+                  if (value.user != null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const HomeScreen();
+                    }));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Login failed")));
+                  }
+                })
+              });
+    }
+  }
+
+  void testLogin() {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      return const HomeScreen();
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +173,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: const Text("Forgot Password"),
                           )),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          signIn();
+                          // testLogin();
+                        },
                         child: Container(
                             width: 100,
                             height: 40,

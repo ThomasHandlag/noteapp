@@ -5,11 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "noteapp",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
             "name": "noteapp (profile mode)",
             "request": "launch",
             "type": "dart",
@@ -28,10 +23,12 @@
             "type": "dart"
         },
         {
-            "name": "build_tool",
-            "cwd": "build\\super_native_extensions\\build\\build_tool",
-            "request": "launch",
-            "type": "dart"
-        }
+        "name": "noteapp",
+		"request": "launch",
+		"type": "dart",
+		"toolArgs": [
+			"--dart-define",
+			"API_KEY=AIzaSyAGwzbXcU2na2KXw9wAcJIRx4pKjDmA1zE",
+		]}
     ]
 }
