@@ -41,50 +41,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCtYGoZ3Yrvzv1jjVBmubuFqmo7BSXOK8Y',
-    appId: '1:498422502310:web:aa1d9a88692b8b015bf567',
-    messagingSenderId: '498422502310',
-    projectId: 'noteapp-3606d',
-    authDomain: 'noteapp-3606d.firebaseapp.com',
-    storageBucket: 'noteapp-3606d.appspot.com',
-    measurementId: 'G-9VPEKHXNPK',
+   
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCGe4hnj3WfE0N67_XMDF8MLSvon3Xole0',
-    appId: '1:498422502310:android:efee1c2f2576b0f65bf567',
-    messagingSenderId: '498422502310',
-    projectId: 'noteapp-3606d',
-    storageBucket: 'noteapp-3606d.appspot.com',
+   
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDhKtj94epmeoJ_XbuSQdh12TqkwzE58_8',
-    appId: '1:498422502310:ios:977bc63ca1da62435bf567',
-    messagingSenderId: '498422502310',
-    projectId: 'noteapp-3606d',
-    storageBucket: 'noteapp-3606d.appspot.com',
-    iosClientId: '498422502310-aubep6rkikrubp19vocl598q72desndg.apps.googleusercontent.com',
-    iosBundleId: 'inv.thugbn.noteapp',
+    
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDhKtj94epmeoJ_XbuSQdh12TqkwzE58_8',
-    appId: '1:498422502310:ios:977bc63ca1da62435bf567',
-    messagingSenderId: '498422502310',
-    projectId: 'noteapp-3606d',
-    storageBucket: 'noteapp-3606d.appspot.com',
-    iosClientId: '498422502310-aubep6rkikrubp19vocl598q72desndg.apps.googleusercontent.com',
-    iosBundleId: 'inv.thugbn.noteapp',
+   
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCtYGoZ3Yrvzv1jjVBmubuFqmo7BSXOK8Y',
-    appId: '1:498422502310:web:b541b231481116635bf567',
-    messagingSenderId: '498422502310',
-    projectId: 'noteapp-3606d',
-    authDomain: 'noteapp-3606d.firebaseapp.com',
-    storageBucket: 'noteapp-3606d.appspot.com',
-    measurementId: 'G-WVJ1QQNRQQ',
+    
   );
 }
